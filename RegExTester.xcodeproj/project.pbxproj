@@ -193,6 +193,7 @@
 				TargetAttributes = {
 					D5751D041CD7FE23006CAEE7 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = D87288NE38;
 					};
 					D5751D181CD7FE23006CAEE7 = {
 						CreatedOnToolsVersion = 7.3;
@@ -401,6 +402,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RegExTester/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leanne63.RegExTester;
@@ -412,6 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RegExTester/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leanne63.RegExTester;

@@ -8,16 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+	
+	// MARK: - Overrides
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	
+	
+	// MARK: - Delegate Functions
+	
+	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+		
+		let newText: NSString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+		
+		if newText.length > 5 {
+			return false
+		}
+		
+		return true
 	}
 
 

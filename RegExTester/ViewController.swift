@@ -22,6 +22,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	
 	// MARK: - Life Cycle Overrides
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		regexCodeField.delegate = self
+		testStringField.delegate = self
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,19 +36,48 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	
+	// MARK: - Actions
+	
+	@IBAction func viewTapped(sender: UITapGestureRecognizer) {
+		
+		// send "fake" textfield
+		textFieldShouldReturn(UITextField())
+	}
+	
+	
 	// MARK: - Delegate Functions
 	
-	func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		
-//		let newText: NSString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-//		
-//		if newText.length > 5 {
-//			return false
-//		}
+		switch textField {
+		case regexCodeField:
+			regexCodeField.resignFirstResponder()
+			if let stringText = testStringField.text
+				where !stringText.isEmpty {
+				// do regex matching
+			}
+			else {
+				testStringField.becomeFirstResponder()
+			}
+			
+			testStringField.becomeFirstResponder()
+			
+		case testStringField:
+			testStringField.resignFirstResponder()
+			if let regexPattern = regexCodeField.text
+				where !regexPattern.isEmpty {
+				// do regex matching
+			}
+			else {
+				regexCodeField.becomeFirstResponder()
+			}
+			
+		default:
+			// shuts down any first responders within this controller's view
+			view.endEditing(true)
+		}
 		
 		return true
 	}
-
-
 }
 

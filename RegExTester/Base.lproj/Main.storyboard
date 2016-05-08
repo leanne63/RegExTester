@@ -49,10 +49,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcde" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0up-oa-FFB" userLabel="Test String Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcde" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0up-oa-FFB" userLabel="Test String Text Field">
                                 <rect key="frame" x="20" y="187" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJ3-oS-SX9" userLabel="Results Label">
                                 <rect key="frame" x="20" y="249" width="61" height="21"/>
@@ -66,13 +66,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Text Field">
                                 <rect key="frame" x="20" y="57" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="SVw-hW-vkN" firstAttribute="leading" secondItem="zKi-1T-dKs" secondAttribute="leading" id="1DK-Qi-DMm"/>
                             <constraint firstItem="0up-oa-FFB" firstAttribute="leading" secondItem="LJ3-oS-SX9" secondAttribute="leading" id="2w3-hX-3Wd"/>
@@ -101,6 +102,9 @@
                             <constraint firstItem="eVJ-Pe-kXK" firstAttribute="top" secondItem="2lE-nE-da6" secondAttribute="bottom" constant="32" id="rqO-kh-dgO"/>
                             <constraint firstItem="mQq-kI-BFU" firstAttribute="leading" secondItem="2lE-nE-da6" secondAttribute="trailing" constant="8" symbolic="YES" id="wIo-Pc-S2r"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="eh2-Yu-27b" appends="YES" id="ffK-EC-HIE"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="globalSwitch" destination="9Qj-SD-XoH" id="5hk-Eg-0r3"/>
@@ -111,6 +115,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eh2-Yu-27b">
+                    <connections>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="Z5w-iU-eQ4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="435" y="418"/>
         </scene>

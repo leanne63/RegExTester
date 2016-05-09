@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -20,94 +19,79 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RegEx Code:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVw-hW-vkN" userLabel="RegEx Code Label">
-                                <rect key="frame" x="20" y="28" width="98" height="21"/>
+                                <rect key="frame" x="20" y="36" width="98" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ignore case (i)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-nE-da6" userLabel="IgnoreCase">
-                                <rect key="frame" x="20" y="95" width="108" height="31"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Text Field">
+                                <rect key="frame" x="20" y="65" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ignore case (i)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-nE-da6" userLabel="IgnoreCase Label">
+                                <rect key="frame" x="20" y="103" width="108" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-kI-BFU" userLabel="IgnoreCase Switch">
-                                <rect key="frame" x="136" y="95" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="global (g)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-fB-mxT" userLabel="Global">
-                                <rect key="frame" x="451" y="95" width="72" height="31"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Qj-SD-XoH" userLabel="Global Switch">
-                                <rect key="frame" x="531" y="95" width="51" height="31"/>
+                                <rect key="frame" x="136" y="103" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test String:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-Pe-kXK" userLabel="Test String Label">
-                                <rect key="frame" x="20" y="158" width="88" height="21"/>
+                                <rect key="frame" x="20" y="166" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcde" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0up-oa-FFB" userLabel="Test String Text Field">
-                                <rect key="frame" x="20" y="187" width="560" height="30"/>
+                                <rect key="frame" x="20" y="195" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJ3-oS-SX9" userLabel="Results Label">
-                                <rect key="frame" x="20" y="249" width="61" height="21"/>
+                                <rect key="frame" x="20" y="257" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="abcde" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
-                                <rect key="frame" x="20" y="278" width="560" height="302"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter regular expression and string to match, then press Return or tap outside of keyboard..." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
+                                <rect key="frame" x="20" y="286" width="560" height="294"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Text Field">
-                                <rect key="frame" x="20" y="57" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="SVw-hW-vkN" firstAttribute="leading" secondItem="zKi-1T-dKs" secondAttribute="leading" id="1DK-Qi-DMm"/>
-                            <constraint firstItem="0up-oa-FFB" firstAttribute="leading" secondItem="LJ3-oS-SX9" secondAttribute="leading" id="2w3-hX-3Wd"/>
-                            <constraint firstItem="2lE-nE-da6" firstAttribute="baseline" secondItem="jDg-fB-mxT" secondAttribute="baseline" id="3WD-qo-rxN"/>
-                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="trailing" secondItem="0up-oa-FFB" secondAttribute="trailing" id="6HH-Ro-dnu"/>
-                            <constraint firstItem="zKi-1T-dKs" firstAttribute="top" secondItem="SVw-hW-vkN" secondAttribute="bottom" constant="8" symbolic="YES" id="APh-yQ-fMM"/>
-                            <constraint firstItem="2lE-nE-da6" firstAttribute="leading" secondItem="eVJ-Pe-kXK" secondAttribute="leading" id="Cw4-RJ-NdE"/>
-                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="top" secondItem="LJ3-oS-SX9" secondAttribute="bottom" constant="8" symbolic="YES" id="FA3-v5-1je"/>
-                            <constraint firstItem="SVw-hW-vkN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JdE-uh-q2t"/>
-                            <constraint firstItem="eVJ-Pe-kXK" firstAttribute="leading" secondItem="0up-oa-FFB" secondAttribute="leading" id="Npv-Sf-IRb"/>
-                            <constraint firstItem="2lE-nE-da6" firstAttribute="top" secondItem="zKi-1T-dKs" secondAttribute="bottom" constant="8" symbolic="YES" id="OIQ-Xr-9ni"/>
-                            <constraint firstItem="zKi-1T-dKs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="OmF-Vw-pCw"/>
-                            <constraint firstItem="zKi-1T-dKs" firstAttribute="leading" secondItem="2lE-nE-da6" secondAttribute="leading" id="PJk-EU-pxQ"/>
-                            <constraint firstItem="9Qj-SD-XoH" firstAttribute="leading" secondItem="jDg-fB-mxT" secondAttribute="trailing" constant="8" symbolic="YES" id="QNI-Kx-V5h"/>
-                            <constraint firstItem="jDg-fB-mxT" firstAttribute="bottom" secondItem="9Qj-SD-XoH" secondAttribute="bottom" id="Zle-bq-M0c"/>
-                            <constraint firstItem="SVw-hW-vkN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="cRY-3W-zHz"/>
-                            <constraint firstItem="2lE-nE-da6" firstAttribute="firstBaseline" secondItem="jDg-fB-mxT" secondAttribute="firstBaseline" id="hN5-yW-7MT"/>
-                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="leading" secondItem="LJ3-oS-SX9" secondAttribute="leading" id="hV1-CU-wXw"/>
-                            <constraint firstItem="LJ3-oS-SX9" firstAttribute="top" secondItem="0up-oa-FFB" secondAttribute="bottom" constant="32" id="iGT-XS-11P"/>
-                            <constraint firstItem="jDg-fB-mxT" firstAttribute="top" secondItem="9Qj-SD-XoH" secondAttribute="top" id="joa-pf-gpR"/>
-                            <constraint firstItem="zKi-1T-dKs" firstAttribute="trailing" secondItem="9Qj-SD-XoH" secondAttribute="trailing" id="k2I-b0-Smx"/>
-                            <constraint firstItem="9Qj-SD-XoH" firstAttribute="trailing" secondItem="0up-oa-FFB" secondAttribute="trailing" id="ker-Ls-PB8"/>
-                            <constraint firstAttribute="bottom" secondItem="Syf-BZ-Q3q" secondAttribute="bottom" constant="20" symbolic="YES" id="lSD-8X-Uyw"/>
-                            <constraint firstItem="2lE-nE-da6" firstAttribute="top" secondItem="mQq-kI-BFU" secondAttribute="top" id="mrf-Ii-Udv"/>
-                            <constraint firstItem="0up-oa-FFB" firstAttribute="top" secondItem="eVJ-Pe-kXK" secondAttribute="bottom" constant="8" symbolic="YES" id="qWj-h6-qT6"/>
-                            <constraint firstItem="eVJ-Pe-kXK" firstAttribute="top" secondItem="2lE-nE-da6" secondAttribute="bottom" constant="32" id="rqO-kh-dgO"/>
-                            <constraint firstItem="mQq-kI-BFU" firstAttribute="leading" secondItem="2lE-nE-da6" secondAttribute="trailing" constant="8" symbolic="YES" id="wIo-Pc-S2r"/>
+                            <constraint firstItem="mQq-kI-BFU" firstAttribute="leading" secondItem="2lE-nE-da6" secondAttribute="trailing" constant="8" symbolic="YES" id="5eM-Gs-xOa"/>
+                            <constraint firstItem="zKi-1T-dKs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8nl-V7-Yp8"/>
+                            <constraint firstItem="SVw-hW-vkN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DVj-7I-q6d"/>
+                            <constraint firstItem="zKi-1T-dKs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Eh4-bn-FgC"/>
+                            <constraint firstItem="0up-oa-FFB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HtT-Jx-8G7"/>
+                            <constraint firstItem="mQq-kI-BFU" firstAttribute="top" secondItem="zKi-1T-dKs" secondAttribute="bottom" constant="8" symbolic="YES" id="IM0-fi-zpd"/>
+                            <constraint firstItem="0up-oa-FFB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="KrP-Vc-aRA"/>
+                            <constraint firstItem="mQq-kI-BFU" firstAttribute="height" secondItem="2lE-nE-da6" secondAttribute="height" id="L3a-1g-3mW"/>
+                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="top" secondItem="LJ3-oS-SX9" secondAttribute="bottom" constant="8" symbolic="YES" id="MFX-yy-nPC"/>
+                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ngp-tS-Wgd"/>
+                            <constraint firstItem="zKi-1T-dKs" firstAttribute="top" secondItem="SVw-hW-vkN" secondAttribute="bottom" constant="8" symbolic="YES" id="ONx-Jm-UWN"/>
+                            <constraint firstItem="2lE-nE-da6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VR7-IP-Szj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Syf-BZ-Q3q" secondAttribute="bottom" constant="20" id="WXc-LM-qHS"/>
+                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b3a-7x-NnW"/>
+                            <constraint firstItem="LJ3-oS-SX9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="clc-g4-Q42"/>
+                            <constraint firstItem="eVJ-Pe-kXK" firstAttribute="top" secondItem="2lE-nE-da6" secondAttribute="bottom" constant="32" id="daX-vI-MzU"/>
+                            <constraint firstItem="0up-oa-FFB" firstAttribute="top" secondItem="eVJ-Pe-kXK" secondAttribute="bottom" constant="8" symbolic="YES" id="fFT-Na-rJv"/>
+                            <constraint firstItem="2lE-nE-da6" firstAttribute="top" secondItem="zKi-1T-dKs" secondAttribute="bottom" constant="8" symbolic="YES" id="g7z-e6-98I"/>
+                            <constraint firstItem="SVw-hW-vkN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="lCf-TK-lI3"/>
+                            <constraint firstItem="eVJ-Pe-kXK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nIE-bO-gYX"/>
+                            <constraint firstItem="LJ3-oS-SX9" firstAttribute="top" secondItem="0up-oa-FFB" secondAttribute="bottom" constant="32" id="nfT-Xy-UG8"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="eh2-Yu-27b" appends="YES" id="ffK-EC-HIE"/>
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="globalSwitch" destination="9Qj-SD-XoH" id="5hk-Eg-0r3"/>
                         <outlet property="ignoreCaseSwitch" destination="mQq-kI-BFU" id="eyQ-PY-vIm"/>
                         <outlet property="regexCodeField" destination="zKi-1T-dKs" id="ouZ-Nc-gdj"/>
                         <outlet property="resultsTextView" destination="Syf-BZ-Q3q" id="Bq4-8L-Rw3"/>

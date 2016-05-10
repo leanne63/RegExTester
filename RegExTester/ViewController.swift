@@ -10,7 +10,12 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 	
-	// MARK: - Properties
+	// MARK: - Properties (Non-Outlets)
+	
+	lazy var regexModel = RegexModel()
+	
+	
+	// MARK: - Properties (Outlets)
 	
 	@IBOutlet weak var ignoreCaseSwitch: UISwitch!
 	
@@ -24,6 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var forwardButton: UIBarButtonItem!
 	@IBOutlet weak var doneButton: UIBarButtonItem!
 	
+	
 	// MARK: - Life Cycle Overrides
 	
 	override func viewWillAppear(animated: Bool) {
@@ -35,6 +41,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		compareStringField.delegate = self
 		compareStringField.inputAccessoryView = toolbar
 		
+		// use keyboardWillShow to set back and forward buttons appropriately
 		NSNotificationCenter.defaultCenter().addObserver(self,
 		                                                 selector: #selector(keyboardWillShow(_:)),
 		                                                 name: UIKeyboardWillShowNotification,
@@ -69,45 +76,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
+	@IBAction func matchButtonTapped(sender: UIButton) {
+		
+		let haveValidStrings = validateRequiredStrings()
+		
+		if haveValidStrings {
+			let regexOptions = ignoreCaseSwitch.on ? .CaseInsensitive : NSRegularExpressionOptions()
+			let patternString = regexPatternField.text!
+			let compareString = compareStringField.text!
+			
+			regexModel.findRegexMatchesWithPattern(patternString, compareString: compareString, regexOptions: regexOptions)
+		}
+		else {
+			resultsTextView.textColor = UIColor.redColor()
+			resultsTextView.text = "Both regular expression string AND compare text must be present!"
+		}
+	}
+	
 	
 	// MARK: - Text Field Delegate Functions
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		
-		// if both pattern and compare string are filled, begin regex
-		// if pattern is filled and compare string is not, move to compare string
-		// if compare string is filled and pattern is not, move to pattern
-		// if neither is filled, move to the one the user did not come from
-		// OR, arrows above keyboard for next and back, and return checks
 		textField.resignFirstResponder()
-		
-		if let pattern = regexPatternField.text where !pattern.isEmpty,
-		   let compareString = compareStringField.text where !compareString.isEmpty {
-			
-			let regexOptions = ignoreCaseSwitch.on ? .CaseInsensitive : NSRegularExpressionOptions()
-			
-			let regexModel = RegExModel()
-			let result = regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: regexOptions)
-			
-			resultsTextView.text = ""
-			if result == nil {
-				resultsTextView.textColor = UIColor.blueColor()
-				resultsTextView.text.appendContentsOf("Matches found:\n\n")
-				for match in regexModel.matchArray {
-					resultsTextView.text.appendContentsOf("\(match)\n")
-				}
-			}
-			else {
-				resultsTextView.textColor = UIColor.redColor()
-				resultsTextView.text = result
-			}
-		}
 		
 		return true
 	}
 	
 	
-	// MARK: - Notification Selectors
+	// MARK: - Selectors
 	
 	func keyboardWillShow(notification: NSNotification) {
 		
@@ -121,6 +118,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
+	func modelDidChangeProperty() {
+		
+		// TODO: set up property observing for model result
+//		resultsTextView.text = ""
+//		if result == nil {
+//			resultsTextView.textColor = UIColor.blueColor()
+//			resultsTextView.text.appendContentsOf("Matches found:\n\n")
+//			for match in regexModel.matchArray {
+//				resultsTextView.text.appendContentsOf("\(match)\n")
+//			}
+//		}
+//		else {
+//			resultsTextView.textColor = UIColor.redColor()
+//			resultsTextView.text = result
+//		}
+	}
+	
 	
 	// MARK: - Private Functions
 	
@@ -128,6 +142,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		
 		// shuts down any first responders within this controller's view
 		view.endEditing(true)
+	}
+	
+	private func validateRequiredStrings() -> Bool {
+		
+		guard let patternString = regexPatternField.text where !patternString.isEmpty,
+			  let compareString = compareStringField.text where !compareString.isEmpty else {
+				return false
+		}
+		
+		return true
 	}
 	
 }

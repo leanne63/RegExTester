@@ -1,5 +1,5 @@
 //
-//  RegExModel.swift
+//  RegexModel.swift
 //  RegExTester
 //
 //  Created by leanne on 5/8/16.
@@ -8,9 +8,18 @@
 
 import Foundation
 
-class RegExModel {
+class RegexModel {
 	
-	var matchArray = [String]()
+	// MARK: - Properties
+	
+	/// Holds any matches found.
+	lazy var matchArray = [String]()
+	
+	/// Holds any messages resulting from matching attempt.
+	var message: String?
+	
+	
+	// MARK: - Methods
 
 	/**
 	
@@ -24,12 +33,14 @@ class RegExModel {
 	returns: An explanatory message if the match failed; nil if matching was successful.
 	
 	*/
-	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) -> String? {
+	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) {
 		
 		matchArray.removeAll()
+		message = nil
 
 		guard let regex = try? NSRegularExpression(pattern: regexPattern, options: regexOptions) else {
-			return ("Unable to configure RegEx object with specified pattern.")
+			message = "Unable to configure RegEx object with specified pattern."
+			return
 		}
 		
 		let matchingOptions: NSMatchingOptions = NSMatchingOptions()
@@ -38,7 +49,8 @@ class RegExModel {
 		let matches = regex.matchesInString(compareString, options: matchingOptions, range: searchRange)
 		
 		guard matches.count > 0 else {
-			return ("No matches found!")
+			message = "No matches found!"
+			return
 		}
 		
 		for match in matches {
@@ -47,7 +59,6 @@ class RegExModel {
 			let matchRange = Range(matchStart..<matchEnd)
 			matchArray.append(compareString.substringWithRange(matchRange))
 		}
-		
-		return nil
 	}
+	
 }

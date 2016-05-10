@@ -14,7 +14,9 @@
 		D5751D131CD7FE23006CAEE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5751D111CD7FE23006CAEE7 /* LaunchScreen.storyboard */; };
 		D5751D1E1CD7FE23006CAEE7 /* RegExTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5751D1D1CD7FE23006CAEE7 /* RegExTesterTests.swift */; };
 		D5751D291CD7FE24006CAEE7 /* RegExTesterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5751D281CD7FE24006CAEE7 /* RegExTesterUITests.swift */; };
-		D5A472C41CE02CAF005887D3 /* RegExModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegExModel.swift */; };
+		D5A472C41CE02CAF005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
+		D5A472C61CE29E46005887D3 /* RegexModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C51CE29E46005887D3 /* RegexModelTests.swift */; };
+		D5A472C71CE29F35005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +50,8 @@
 		D5751D241CD7FE23006CAEE7 /* RegExTesterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegExTesterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5751D281CD7FE24006CAEE7 /* RegExTesterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegExTesterUITests.swift; sourceTree = "<group>"; };
 		D5751D2A1CD7FE24006CAEE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D5A472C31CE02CAF005887D3 /* RegExModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegExModel.swift; sourceTree = "<group>"; };
+		D5A472C31CE02CAF005887D3 /* RegexModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModel.swift; sourceTree = "<group>"; };
+		D5A472C51CE29E46005887D3 /* RegexModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +104,7 @@
 			children = (
 				D5751D081CD7FE23006CAEE7 /* AppDelegate.swift */,
 				D5751D0A1CD7FE23006CAEE7 /* ViewController.swift */,
-				D5A472C31CE02CAF005887D3 /* RegExModel.swift */,
+				D5A472C31CE02CAF005887D3 /* RegexModel.swift */,
 				D5751D0C1CD7FE23006CAEE7 /* Main.storyboard */,
 				D5751D0F1CD7FE23006CAEE7 /* Assets.xcassets */,
 				D5751D111CD7FE23006CAEE7 /* LaunchScreen.storyboard */,
@@ -114,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				D5751D1D1CD7FE23006CAEE7 /* RegExTesterTests.swift */,
+				D5A472C51CE29E46005887D3 /* RegexModelTests.swift */,
 				D5751D1F1CD7FE23006CAEE7 /* Info.plist */,
 			);
 			path = RegExTesterTests;
@@ -260,7 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5A472C41CE02CAF005887D3 /* RegExModel.swift in Sources */,
+				D5A472C41CE02CAF005887D3 /* RegexModel.swift in Sources */,
 				D5751D0B1CD7FE23006CAEE7 /* ViewController.swift in Sources */,
 				D5751D091CD7FE23006CAEE7 /* AppDelegate.swift in Sources */,
 			);
@@ -271,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5751D1E1CD7FE23006CAEE7 /* RegExTesterTests.swift in Sources */,
+				D5A472C71CE29F35005887D3 /* RegexModel.swift in Sources */,
+				D5A472C61CE29E46005887D3 /* RegexModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

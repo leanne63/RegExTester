@@ -35,7 +35,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-kI-BFU" userLabel="IgnoreCase Switch">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-kI-BFU" userLabel="IgnoreCase Switch">
                                 <rect key="frame" x="136" y="103" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compare String:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-Pe-kXK" userLabel="Compare String Label">
@@ -49,14 +49,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMp-AG-HA5" userLabel="Match Button">
+                                <rect key="frame" x="0.0" y="233" width="600" height="30"/>
+                                <state key="normal" title="Match!"/>
+                                <connections>
+                                    <action selector="matchButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzP-Ne-boX"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJ3-oS-SX9" userLabel="Results Label">
-                                <rect key="frame" x="20" y="257" width="61" height="21"/>
+                                <rect key="frame" x="20" y="271" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter regular expression and string to match above; then press Return to match. (Tap anywhere on screen to remove keyboard.)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
-                                <rect key="frame" x="20" y="286" width="560" height="322"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter regular expression and string to match above; then press Return to match. (Tap anywhere on screen to dismiss keyboard.)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
+                                <rect key="frame" x="20" y="300" width="560" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -65,6 +72,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="KMp-AG-HA5" firstAttribute="top" secondItem="0up-oa-FFB" secondAttribute="bottom" constant="8" symbolic="YES" id="2ME-Si-6DO"/>
                             <constraint firstItem="mQq-kI-BFU" firstAttribute="leading" secondItem="2lE-nE-da6" secondAttribute="trailing" constant="8" symbolic="YES" id="5eM-Gs-xOa"/>
                             <constraint firstItem="zKi-1T-dKs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8nl-V7-Yp8"/>
                             <constraint firstItem="SVw-hW-vkN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="DVj-7I-q6d"/>
@@ -77,15 +85,17 @@
                             <constraint firstItem="Syf-BZ-Q3q" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ngp-tS-Wgd"/>
                             <constraint firstItem="zKi-1T-dKs" firstAttribute="top" secondItem="SVw-hW-vkN" secondAttribute="bottom" constant="8" symbolic="YES" id="ONx-Jm-UWN"/>
                             <constraint firstItem="2lE-nE-da6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VR7-IP-Szj"/>
-                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="8" symbolic="YES" id="WXc-LM-qHS"/>
+                            <constraint firstItem="LJ3-oS-SX9" firstAttribute="top" secondItem="KMp-AG-HA5" secondAttribute="bottom" constant="8" symbolic="YES" id="WR7-qj-nIL"/>
+                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-20" id="WXc-LM-qHS"/>
                             <constraint firstItem="Syf-BZ-Q3q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b3a-7x-NnW"/>
                             <constraint firstItem="LJ3-oS-SX9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="clc-g4-Q42"/>
                             <constraint firstItem="eVJ-Pe-kXK" firstAttribute="top" secondItem="2lE-nE-da6" secondAttribute="bottom" constant="32" id="daX-vI-MzU"/>
+                            <constraint firstItem="KMp-AG-HA5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="20" id="dyJ-jb-keF"/>
                             <constraint firstItem="0up-oa-FFB" firstAttribute="top" secondItem="eVJ-Pe-kXK" secondAttribute="bottom" constant="8" symbolic="YES" id="fFT-Na-rJv"/>
                             <constraint firstItem="2lE-nE-da6" firstAttribute="top" secondItem="zKi-1T-dKs" secondAttribute="bottom" constant="8" symbolic="YES" id="g7z-e6-98I"/>
                             <constraint firstItem="SVw-hW-vkN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="lCf-TK-lI3"/>
                             <constraint firstItem="eVJ-Pe-kXK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nIE-bO-gYX"/>
-                            <constraint firstItem="LJ3-oS-SX9" firstAttribute="top" secondItem="0up-oa-FFB" secondAttribute="bottom" constant="32" id="nfT-Xy-UG8"/>
+                            <constraint firstItem="KMp-AG-HA5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="nS7-Oi-7IF"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="eh2-Yu-27b" appends="YES" id="ffK-EC-HIE"/>
@@ -108,7 +118,7 @@
                         <action selector="viewTapped:" destination="BYZ-38-t0r" id="Z5w-iU-eQ4"/>
                     </connections>
                 </tapGestureRecognizer>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8Lc-hK-fSd">
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8Lc-hK-fSd" userLabel="Keyboard Toolbar">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <items>

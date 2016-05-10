@@ -18,13 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RegEx Code:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVw-hW-vkN" userLabel="RegEx Code Label">
-                                <rect key="frame" x="20" y="36" width="98" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RegEx Pattern:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVw-hW-vkN" userLabel="RegEx Pattern Label">
+                                <rect key="frame" x="20" y="36" width="113" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="[A-Z0-9]*" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zKi-1T-dKs" userLabel="RegEx Pattern Field">
                                 <rect key="frame" x="20" y="65" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -38,13 +38,13 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-kI-BFU" userLabel="IgnoreCase Switch">
                                 <rect key="frame" x="136" y="103" width="51" height="31"/>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test String:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-Pe-kXK" userLabel="Test String Label">
-                                <rect key="frame" x="20" y="166" width="88" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compare String:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVJ-Pe-kXK" userLabel="Compare String Label">
+                                <rect key="frame" x="20" y="166" width="125" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abcde" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0up-oa-FFB" userLabel="Test String Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="String to match on..." textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0up-oa-FFB" userLabel="Compare String Field">
                                 <rect key="frame" x="20" y="195" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -55,11 +55,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter regular expression and string to match, then press Return or tap outside of keyboard..." textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
-                                <rect key="frame" x="20" y="286" width="560" height="294"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter regular expression and string to match above; then press Return to match. (Tap anywhere on screen to remove keyboard.)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Syf-BZ-Q3q" userLabel="Results Text View">
+                                <rect key="frame" x="20" y="286" width="560" height="322"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -77,7 +77,7 @@
                             <constraint firstItem="Syf-BZ-Q3q" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ngp-tS-Wgd"/>
                             <constraint firstItem="zKi-1T-dKs" firstAttribute="top" secondItem="SVw-hW-vkN" secondAttribute="bottom" constant="8" symbolic="YES" id="ONx-Jm-UWN"/>
                             <constraint firstItem="2lE-nE-da6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VR7-IP-Szj"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Syf-BZ-Q3q" secondAttribute="bottom" constant="20" id="WXc-LM-qHS"/>
+                            <constraint firstItem="Syf-BZ-Q3q" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="8" symbolic="YES" id="WXc-LM-qHS"/>
                             <constraint firstItem="Syf-BZ-Q3q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b3a-7x-NnW"/>
                             <constraint firstItem="LJ3-oS-SX9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="clc-g4-Q42"/>
                             <constraint firstItem="eVJ-Pe-kXK" firstAttribute="top" secondItem="2lE-nE-da6" secondAttribute="bottom" constant="32" id="daX-vI-MzU"/>
@@ -92,10 +92,14 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="hRJ-LN-7uc" id="Eg3-Tv-tPU"/>
+                        <outlet property="compareStringField" destination="0up-oa-FFB" id="MjA-L6-k1U"/>
+                        <outlet property="doneButton" destination="bAf-F9-eJh" id="sJ1-Xj-0XY"/>
+                        <outlet property="forwardButton" destination="Thb-AY-qRj" id="iFL-Ik-fwg"/>
                         <outlet property="ignoreCaseSwitch" destination="mQq-kI-BFU" id="eyQ-PY-vIm"/>
-                        <outlet property="regexCodeField" destination="zKi-1T-dKs" id="ouZ-Nc-gdj"/>
+                        <outlet property="regexPatternField" destination="zKi-1T-dKs" id="b23-xG-RYm"/>
                         <outlet property="resultsTextView" destination="Syf-BZ-Q3q" id="Bq4-8L-Rw3"/>
-                        <outlet property="testStringField" destination="0up-oa-FFB" id="HqK-Tk-qgI"/>
+                        <outlet property="toolbar" destination="8Lc-hK-fSd" id="0v7-cf-cph"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -104,6 +108,28 @@
                         <action selector="viewTapped:" destination="BYZ-38-t0r" id="Z5w-iU-eQ4"/>
                     </connections>
                 </tapGestureRecognizer>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8Lc-hK-fSd">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <items>
+                        <barButtonItem title="＜" id="hRJ-LN-7uc">
+                            <connections>
+                                <action selector="keyboardToolbarItemTapped:" destination="BYZ-38-t0r" id="iVD-C0-eB6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="＞" id="Thb-AY-qRj">
+                            <connections>
+                                <action selector="keyboardToolbarItemTapped:" destination="BYZ-38-t0r" id="xbS-hP-sgb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ZuB-Pf-LUK"/>
+                        <barButtonItem style="done" systemItem="done" id="bAf-F9-eJh">
+                            <connections>
+                                <action selector="keyboardToolbarItemTapped:" destination="BYZ-38-t0r" id="j3I-q5-Zvl"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </objects>
             <point key="canvasLocation" x="435" y="418"/>
         </scene>

@@ -35,4 +35,20 @@ class RegexModelTests: XCTestCase {
 		XCTAssertEqual(emptyStringArray, regexModel.matchArray)
 	}
 	
+	func testModelEmptyPatternResponse() {
+		
+		let regexModel = RegexModel()
+		let pattern = ""
+		let compareString = "This is my compare string!"
+		let options = NSRegularExpressionOptions()
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let expectedMessage = "Need a regular expression pattern to match."
+		let emptyStringArray = [String]()
+		
+		XCTAssertEqual(expectedMessage, regexModel.message)
+		XCTAssertEqual(regexModel.matchArray, emptyStringArray)
+	}
+	
 }

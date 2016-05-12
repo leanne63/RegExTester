@@ -10,11 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 	
-	// MARK: - Properties (Non-Outlets)
-	
-	//lazy var regexModel = RegexModel()
-	
-	
 	// MARK: - Properties (Outlets)
 	
 	@IBOutlet weak var ignoreCaseSwitch: UISwitch!

@@ -12,11 +12,24 @@ class RegexModel {
 	
 	// MARK: - Properties
 	
+	// constants
+	let matchArrayDidChange = "matchArrayDidChange"
+	let messageDidChange = "messageDidChange"
+	
+	
 	/// Holds any matches found.
-	lazy var matchArray = [String]()
+	var matchArray = [String]() {
+		didSet {
+			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: matchArray)
+		}
+	}
 	
 	/// Holds any messages resulting from matching attempt.
-	var message: String?
+	var message: String? {
+		didSet {
+			NSNotificationCenter.defaultCenter().postNotificationName(messageDidChange, object: message)
+		}
+	}
 	
 	
 	// MARK: - Methods
@@ -34,9 +47,6 @@ class RegexModel {
 	
 	*/
 	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) {
-		
-		matchArray.removeAll()
-		message = nil
 
 		guard let regex = try? NSRegularExpression(pattern: regexPattern, options: regexOptions) else {
 			message = "Unable to configure RegEx object with specified pattern."
@@ -53,12 +63,16 @@ class RegexModel {
 			return
 		}
 		
+		var matchList = [String]()
 		for match in matches {
 			let matchStart = compareString.startIndex.advancedBy(match.range.location)
 			let matchEnd = compareString.startIndex.advancedBy(match.range.location + match.range.length)
 			let matchRange = Range(matchStart..<matchEnd)
-			matchArray.append(compareString.substringWithRange(matchRange))
+			matchList.append(compareString.substringWithRange(matchRange))
 		}
+		
+		matchArray = matchList
+		
 	}
 	
 }

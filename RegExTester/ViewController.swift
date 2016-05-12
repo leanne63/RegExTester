@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	// MARK: - Properties (Non-Outlets)
 	
-	lazy var regexModel = RegexModel()
+	//lazy var regexModel = RegexModel()
 	
 	
 	// MARK: - Properties (Outlets)
@@ -41,12 +41,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		compareStringField.delegate = self
 		compareStringField.inputAccessoryView = toolbar
 		
-		// use keyboardWillShow to set back and forward buttons appropriately
-		NSNotificationCenter.defaultCenter().addObserver(self,
-		                                                 selector: #selector(keyboardWillShow(_:)),
-		                                                 name: UIKeyboardWillShowNotification,
-		                                                 object: nil)
-		
+		subscribeToStuff()
+	}
+	
+	deinit {
+		// unsubscribe from everything
+		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 
 	
@@ -83,6 +83,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 			let patternString = regexPatternField.text!
 			let compareString = compareStringField.text!
 			
+			let regexModel = RegexModel()
 			regexModel.findRegexMatchesWithPattern(patternString, compareString: compareString, regexOptions: regexOptions)
 		}
 		else {
@@ -116,21 +117,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	func modelDidChangeProperty() {
+	func regexMatchDidComplete(notification: NSNotification) {
 		
-		// TODO: set up property observing for model result
-//		resultsTextView.text = ""
-//		if result == nil {
-//			resultsTextView.textColor = UIColor.blueColor()
-//			resultsTextView.text.appendContentsOf("Matches found:\n\n")
-//			for match in regexModel.matchArray {
-//				resultsTextView.text.appendContentsOf("\(match)\n")
-//			}
-//		}
-//		else {
-//			resultsTextView.textColor = UIColor.redColor()
-//			resultsTextView.text = result
-//		}
+		resultsTextView.text = ""
+		if notification.name == "matchArrayDidChange" {
+			resultsTextView.textColor = UIColor.blueColor()
+			resultsTextView.text.appendContentsOf("Matches found:\n\n")
+			let matchArray = notification.object as! [String]
+			for match in matchArray {
+				resultsTextView.text.appendContentsOf("\(match)\n")
+			}
+		}
+		else {
+			resultsTextView.textColor = UIColor.redColor()
+			let message = notification.object as! String
+			resultsTextView.text = message
+		}
 	}
 	
 	
@@ -160,6 +162,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 		
 		return true
+	}
+	
+	private func subscribeToStuff() {
+		
+		NSNotificationCenter.defaultCenter().addObserver(self,
+		                                                 selector: #selector(keyboardWillShow(_:)),
+		                                                 name: UIKeyboardWillShowNotification,
+		                                                 object: nil)
+		
+		NSNotificationCenter.defaultCenter().addObserver(self,
+		                                                 selector: #selector(regexMatchDidComplete(_:)),
+		                                                 name: "matchArrayDidChange",
+		                                                 object: nil)
+		
+		NSNotificationCenter.defaultCenter().addObserver(self,
+		                                                 selector: #selector(regexMatchDidComplete(_:)),
+		                                                 name: "messageDidChange",
+		                                                 object: nil)
 	}
 	
 }

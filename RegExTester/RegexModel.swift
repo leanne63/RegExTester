@@ -13,8 +13,8 @@ class RegexModel {
 	// MARK: - Properties
 	
 	// constants
-	let matchArrayDidChange = "matchArrayDidChange"
-	let messageDidChange = "messageDidChange"
+	private let matchArrayDidChange = "matchArrayDidChange"
+	private let messageDidChange = "messageDidChange"
 	
 	
 	/// Holds any matches found.

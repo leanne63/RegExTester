@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	@IBOutlet weak var resultsTextView: UITextView!
 	
-	@IBOutlet var toolbar: UIToolbar!
+	@IBOutlet weak var toolbar: UIToolbar!
 	@IBOutlet weak var backButton: UIBarButtonItem!
 	@IBOutlet weak var forwardButton: UIBarButtonItem!
 	@IBOutlet weak var doneButton: UIBarButtonItem!

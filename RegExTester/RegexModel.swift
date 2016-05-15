@@ -18,9 +18,9 @@ class RegexModel {
 	
 	
 	/// Holds any matches found.
-	var matchArray = [String]() {
+	var matchArray = [[Range<String.CharacterView.Index>]]() {
 		didSet {
-			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: matchArray)
+			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: matchArray as? AnyObject)
 		}
 	}
 	
@@ -43,36 +43,59 @@ class RegexModel {
 		- compareString: The string in which to search for the matching pattern.
 		- regexOptions: Any special pattern-matching options, such as NSRegularExpressionOptions.CaseInsensitive.
 	
-	returns: An explanatory message if the match failed; nil if matching was successful.
-	
 	*/
 	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) {
 
+		// create regex
 		guard let regex = try? NSRegularExpression(pattern: regexPattern, options: regexOptions) else {
-			message = "Unable to configure RegEx object with specified pattern."
+			let patternString = regexPattern.isEmpty ? "<empty!>" : regexPattern
+			message = "Unable to configure RegEx object with specified pattern (/\(patternString)/)."
 			return
 		}
 		
 		let matchingOptions: NSMatchingOptions = NSMatchingOptions()
 		let searchRange = NSMakeRange(0, compareString.characters.count)
 		
+		// run the regex
 		let matches = regex.matchesInString(compareString, options: matchingOptions, range: searchRange)
-		
+
 		guard matches.count > 0 else {
 			message = "No matches found!"
 			return
 		}
 		
-		var matchList = [String]()
-		for match in matches {
-			let matchStart = compareString.startIndex.advancedBy(match.range.location)
-			let matchEnd = compareString.startIndex.advancedBy(match.range.location + match.range.length)
-			let matchRange = Range(matchStart..<matchEnd)
-			matchList.append(compareString.substringWithRange(matchRange))
+		// convert match NSRange objects to Swift Range objects; add them to the match array
+		var matchList = [[Range<String.CharacterView.Index>]]()
+		for (matchIndex, match) in matches.enumerate() {
+			var tempArray = [Range<String.CharacterView.Index>]()
+			
+			let matchRange0 = makeSwiftRangeForString(compareString, nsRange: match.range)
+			tempArray.insert(matchRange0, atIndex: 0)
+
+			let numRanges = match.numberOfRanges
+			
+			for groupIndex in 1..<numRanges where numRanges > 1 {
+				let groupMatchRange = makeSwiftRangeForString(compareString, nsRange: match.rangeAtIndex(groupIndex))
+				tempArray.insert(groupMatchRange, atIndex: groupIndex)
+			}
+			
+			matchList.insert(tempArray, atIndex: matchIndex)
 		}
 		
 		matchArray = matchList
+		print("matchArray = \(matchArray)")	// TODO: remove this when done with testing
+	}
+	
+	
+	// MARK: - Private Functions
+	
+	private func makeSwiftRangeForString(string: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
 		
+		let swiftRangeStart = string.startIndex.advancedBy(nsRange.location)
+		let swiftRangeEnd = string.startIndex.advancedBy(nsRange.location + nsRange.length)
+		
+		let swiftRange = Range(swiftRangeStart..<swiftRangeEnd)
+		return swiftRange
 	}
 	
 }

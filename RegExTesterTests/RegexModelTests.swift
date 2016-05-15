@@ -30,9 +30,9 @@ class RegexModelTests: XCTestCase {
 	func testModelMatchArrayEmptyAtStart() {
 		
 		let regexModel = RegexModel()
-		let emptyStringArray = [String]()
+		let emptyRangeArray = [[Range<String.CharacterView.Index>]]()
 		
-		XCTAssertEqual(emptyStringArray, regexModel.matchArray)
+		XCTAssertEqual(emptyRangeArray.count, regexModel.matchArray.count)
 	}
 	
 	func testModelEmptyPatternResponse() {
@@ -44,11 +44,99 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let expectedMessage = "Need a regular expression pattern to match."
-		let emptyStringArray = [String]()
+		let expectedMessage = "Unable to configure RegEx object with specified pattern (/<empty!>/)."
+		let emptyRangeArray = [[Range<String.CharacterView.Index>]]()
 		
 		XCTAssertEqual(expectedMessage, regexModel.message)
-		XCTAssertEqual(regexModel.matchArray, emptyStringArray)
+		XCTAssertEqual(emptyRangeArray.count, regexModel.matchArray.count)
+	}
+	
+	func testModelSendsProperNotification(notification: NSNotification?) {
+		// TODO: finish this function
+		// looks like notification expectations are coming out in Swift 3.0:
+		// https://github.com/apple/swift-corelibs-xctest/blob/master/Sources/XCTest/XCNotificationExpectationHandler.swift
+	}
+	
+	func testModelHasValidMatchArray() {
+		
+		let regexModel = RegexModel()
+		let pattern = "ABC"
+		let compareString = "ABC"
+		let options = NSRegularExpressionOptions()
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let expectedArray = [[matchRange]]
+
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+	}
+	
+	func testModelHasValidMatchArrayWithGroup() {
+		
+		let regexModel = RegexModel()
+		let pattern = "A(BC)"
+		let compareString = "ABC"
+		let options = NSRegularExpressionOptions()
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let groupRangeStart = compareString.startIndex.advancedBy(1)
+		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		
+		let expectedArray = [[matchRange, groupRange]]
+
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+		XCTAssertEqual(expectedArray[0][1], regexModel.matchArray[0][1])
+	}
+	
+	func testModelHasValidMatchArrayCaseInsensitive() {
+		
+		let regexModel = RegexModel()
+		let pattern = "ABC"
+		let compareString = "abc"
+		let options = NSRegularExpressionOptions.CaseInsensitive
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let expectedArray = [[matchRange]]
+		
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+	}
+	
+	func testModelHasValidMatchArrayWithGroupCaseInsensitive() {
+		
+		let regexModel = RegexModel()
+		let pattern = "A(BC)"
+		let compareString = "abc"
+		let options = NSRegularExpressionOptions.CaseInsensitive
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let groupRangeStart = compareString.startIndex.advancedBy(1)
+		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		
+		let expectedArray = [[matchRange, groupRange]]
+		
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+		XCTAssertEqual(expectedArray[0][1], regexModel.matchArray[0][1])
 	}
 	
 }

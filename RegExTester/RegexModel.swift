@@ -14,20 +14,28 @@ class RegexModel {
 	
 	// constants
 	private let matchArrayDidChange = "matchArrayDidChange"
+	private let matchArrayKey = "matchArray"
 	private let messageDidChange = "messageDidChange"
+	private let messageKey = "message"
 	
 	
 	/// Holds any matches found.
 	var matchArray = [[Range<String.CharacterView.Index>]]() {
 		didSet {
-			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: matchArray as? AnyObject)
+			// TODO: create userinfo dictionary with Range<Index> type???
+			print("didSet:\n\(matchArray)\n*****")
+			//let userInfoDict = [matchArrayKey: matchArray as! AnyObject]
+			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: nil, userInfo: nil)
 		}
 	}
 	
-	/// Holds any messages resulting from matching attempt.
+	/// Holds any messages regarding issues with matching attempt.
 	var message: String? {
 		didSet {
-			NSNotificationCenter.defaultCenter().postNotificationName(messageDidChange, object: message)
+			if let message = message {
+				let userInfoDict = [messageKey: message]
+				NSNotificationCenter.defaultCenter().postNotificationName(messageDidChange, object: nil, userInfo: userInfoDict)
+			}
 		}
 	}
 	
@@ -36,7 +44,7 @@ class RegexModel {
 
 	/**
 	
-	Checks for regular expression matches in a provided string.
+	Checks for regular expression matches, including group captures, in a provided string.
 	
 	parameters:
 		- regexPattern: The regular expression pattern on which to match.
@@ -54,7 +62,12 @@ class RegexModel {
 		}
 		
 		let matchingOptions: NSMatchingOptions = NSMatchingOptions()
-		let searchRange = NSMakeRange(0, compareString.characters.count)
+		
+		// note that search range must be NSRange, even though compare string is a String (not NSString!) (as of Swift 2.2)
+		// as a result, range length value must match NSString, NOT String (to allow for unicode characters such as emoji)
+		let rangeLocation = 0
+		let rangeLength = (compareString as NSString).length
+		let searchRange = NSMakeRange(rangeLocation, rangeLength)
 		
 		// run the regex
 		let matches = regex.matchesInString(compareString, options: matchingOptions, range: searchRange)
@@ -64,19 +77,17 @@ class RegexModel {
 			return
 		}
 		
-		// convert match NSRange objects to Swift Range objects; add them to the match array
+		// matches come as NSRange values; we want to put Swift Range values into the array, though
 		var matchList = [[Range<String.CharacterView.Index>]]()
 		for (matchIndex, match) in matches.enumerate() {
 			var tempArray = [Range<String.CharacterView.Index>]()
 			
-			let matchRange0 = makeSwiftRangeForString(compareString, nsRange: match.range)
-			tempArray.insert(matchRange0, atIndex: 0)
-
 			let numRanges = match.numberOfRanges
 			
-			for groupIndex in 1..<numRanges where numRanges > 1 {
-				let groupMatchRange = makeSwiftRangeForString(compareString, nsRange: match.rangeAtIndex(groupIndex))
-				tempArray.insert(groupMatchRange, atIndex: groupIndex)
+			for currIndex in 0..<numRanges {
+				let theNSRange = match.rangeAtIndex(currIndex)
+				let swiftMatchRange = makeSwiftRangeForString(compareString, nsRange: theNSRange)
+				tempArray.insert(swiftMatchRange, atIndex: currIndex)
 			}
 			
 			matchList.insert(tempArray, atIndex: matchIndex)
@@ -89,12 +100,21 @@ class RegexModel {
 	
 	// MARK: - Private Functions
 	
-	private func makeSwiftRangeForString(string: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
+	private func makeSwiftRangeForString(swiftString: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
 		
-		let swiftRangeStart = string.startIndex.advancedBy(nsRange.location)
-		let swiftRangeEnd = string.startIndex.advancedBy(nsRange.location + nsRange.length)
+		// TODO: add "as of version" attribute in case of future changes
+		// TODO: what to do if range ends up being nil? don't want crashing!
+		// NSRange was actually created using NSString (UTF-16) under the hood (as of Swift 2.2); as a result,
+		//   need to convert String argument to UTF16 view to create a valid Swift String range
+		let string16 = swiftString.utf16
 		
-		let swiftRange = Range(swiftRangeStart..<swiftRangeEnd)
+		let start = nsRange.location
+		let end = nsRange.location + nsRange.length
+		
+		let swiftRangeStart = string16.startIndex.advancedBy(start).samePositionIn(swiftString)
+		let swiftRangeEnd = string16.startIndex.advancedBy(end).samePositionIn(swiftString)
+		
+		let swiftRange = Range(swiftRangeStart!..<swiftRangeEnd!)
 		return swiftRange
 	}
 	

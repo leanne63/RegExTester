@@ -139,4 +139,58 @@ class RegexModelTests: XCTestCase {
 		XCTAssertEqual(expectedArray[0][1], regexModel.matchArray[0][1])
 	}
 	
+	func testModelHasValidMatchArrayWithEmoji() {
+		
+		// \\N{Face without mouth}
+		/*
+		😶
+		Face without mouth
+		Unicode: U+1F636, UTF-8: F0 9F 98 B6
+		*/
+		
+		/*
+		😏
+		Smirking face
+		Unicode: U+1F60F, UTF-8: F0 9F 98 8F
+		*/
+		
+		let regexModel = RegexModel()
+		let pattern = "A\\U0001F636C"
+		let compareString = "A😶C"
+		let options = NSRegularExpressionOptions()
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let expectedArray = [[matchRange]]
+		
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+	}
+	
+	func testModelHasValidMatchArrayWithGroupWithEmoji() {
+		
+		let regexModel = RegexModel()
+		let pattern = "A(\\N{Face without mouth}C)"
+		let compareString = "A😶C"
+		let options = NSRegularExpressionOptions()
+		
+		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
+		
+		let rangeStart = compareString.startIndex.advancedBy(0)
+		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let matchRange = Range(rangeStart..<rangeEnd)
+		
+		let groupRangeStart = compareString.startIndex.advancedBy(1)
+		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		
+		let expectedArray = [[matchRange, groupRange]]
+		
+		XCTAssertEqual(expectedArray[0][0], regexModel.matchArray[0][0])
+		XCTAssertEqual(expectedArray[0][1], regexModel.matchArray[0][1])
+	}
+	
 }

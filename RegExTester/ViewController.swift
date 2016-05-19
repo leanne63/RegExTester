@@ -113,14 +113,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	func regexMatchDidComplete(notification: NSNotification) {
-		
+
 		resultsTextView.text = ""
 		if notification.name == "matchArrayDidChange" {
 			resultsTextView.textColor = UIColor.blueColor()
 			resultsTextView.text.appendContentsOf("Matches found:\n\n")
-			let matchArray = notification.object as! [String]
+			
+			
+			let rangeArrayObject = notification.userInfo!["matchArray"] as! RangeArray
+			let matchArray = rangeArrayObject.array
+			
+			// TODO: create function to match range objects :)
 			for match in matchArray {
-				resultsTextView.text.appendContentsOf("\(match)\n")
+				print("view controller found: \(match)")
 			}
 		}
 		else {

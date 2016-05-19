@@ -22,10 +22,10 @@ class RegexModel {
 	/// Holds any matches found.
 	var matchArray = [[Range<String.CharacterView.Index>]]() {
 		didSet {
-			// TODO: create userinfo dictionary with Range<Index> type???
-			print("didSet:\n\(matchArray)\n*****")
-			//let userInfoDict = [matchArrayKey: matchArray as! AnyObject]
-			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: nil, userInfo: nil)
+			// using a custom class to wrap the array; since it's a struct, it can't be passed as AnyObject on its own
+			let rangeArray: AnyObject = RangeArray(matchArray)
+			let userInfoDict = [matchArrayKey: rangeArray]
+			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: nil, userInfo: userInfoDict)
 		}
 	}
 	
@@ -54,7 +54,7 @@ class RegexModel {
 	*/
 	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) {
 
-		// create regex
+		// create regex object
 		guard let regex = try? NSRegularExpression(pattern: regexPattern, options: regexOptions) else {
 			let patternString = regexPattern.isEmpty ? "<empty!>" : regexPattern
 			message = "Unable to configure RegEx object with specified pattern (/\(patternString)/)."
@@ -79,22 +79,20 @@ class RegexModel {
 		
 		// matches come as NSRange values; we want to put Swift Range values into the array, though
 		var matchList = [[Range<String.CharacterView.Index>]]()
-		for (matchIndex, match) in matches.enumerate() {
-			var tempArray = [Range<String.CharacterView.Index>]()
-			
+		for (outerIndex, match) in matches.enumerate() {
 			let numRanges = match.numberOfRanges
 			
-			for currIndex in 0..<numRanges {
-				let theNSRange = match.rangeAtIndex(currIndex)
-				let swiftMatchRange = makeSwiftRangeForString(compareString, nsRange: theNSRange)
-				tempArray.insert(swiftMatchRange, atIndex: currIndex)
-			}
+			matchList.insert([Range<String.CharacterView.Index>](), atIndex: outerIndex)
 			
-			matchList.insert(tempArray, atIndex: matchIndex)
+			for innerIndex in 0..<numRanges {
+				let theNSRange = match.rangeAtIndex(innerIndex)
+				let swiftMatchRange = makeSwiftRangeForString(compareString, nsRange: theNSRange)
+				
+				matchList[outerIndex].insert(swiftMatchRange, atIndex: innerIndex)
+			}
 		}
 		
 		matchArray = matchList
-		print("matchArray = \(matchArray)")	// TODO: remove this when done with testing
 	}
 	
 	

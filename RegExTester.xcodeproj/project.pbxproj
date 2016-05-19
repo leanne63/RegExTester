@@ -17,6 +17,7 @@
 		D5A472C41CE02CAF005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
 		D5A472C61CE29E46005887D3 /* RegexModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C51CE29E46005887D3 /* RegexModelTests.swift */; };
 		D5A472C71CE29F35005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
+		D5D5829D1CED18FF00E39110 /* RangeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5829C1CED18FF00E39110 /* RangeArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		D5751D2A1CD7FE24006CAEE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A472C31CE02CAF005887D3 /* RegexModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModel.swift; sourceTree = "<group>"; };
 		D5A472C51CE29E46005887D3 /* RegexModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModelTests.swift; sourceTree = "<group>"; };
+		D5D5829C1CED18FF00E39110 /* RangeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeArray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				D5751D081CD7FE23006CAEE7 /* AppDelegate.swift */,
 				D5751D0A1CD7FE23006CAEE7 /* ViewController.swift */,
 				D5A472C31CE02CAF005887D3 /* RegexModel.swift */,
+				D5D5829C1CED18FF00E39110 /* RangeArray.swift */,
 				D5751D0C1CD7FE23006CAEE7 /* Main.storyboard */,
 				D5751D0F1CD7FE23006CAEE7 /* Assets.xcassets */,
 				D5751D111CD7FE23006CAEE7 /* LaunchScreen.storyboard */,
@@ -267,6 +270,7 @@
 				D5A472C41CE02CAF005887D3 /* RegexModel.swift in Sources */,
 				D5751D0B1CD7FE23006CAEE7 /* ViewController.swift in Sources */,
 				D5751D091CD7FE23006CAEE7 /* AppDelegate.swift in Sources */,
+				D5D5829D1CED18FF00E39110 /* RangeArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

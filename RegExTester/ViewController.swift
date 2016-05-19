@@ -113,31 +113,41 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	}
 	
 	func regexMatchDidComplete(notification: NSNotification) {
+		
+		let arrayChangedNotification = "matchArrayDidChange"
+		let matchArrayKey = "matchArray"
+		let compareString = compareStringField.text!
 
 		resultsTextView.text = ""
-		if notification.name == "matchArrayDidChange" {
+		if notification.name == arrayChangedNotification {
 			resultsTextView.textColor = UIColor.blueColor()
 			resultsTextView.text.appendContentsOf("Matches found:\n\n")
 			
+			let rangeArrayObject = notification.userInfo![matchArrayKey] as! RangeArray
+			let matchArray: [[Range<String.CharacterView.Index>]] = rangeArrayObject.array
 			
-			let rangeArrayObject = notification.userInfo!["matchArray"] as! RangeArray
-			let matchArray = rangeArrayObject.array
-			
-			// TODO: create function to match range objects :)
-			for match in matchArray {
-				print("view controller found: \(match)")
+			var resultsText = ""
+			for matchArrayItem in matchArray {
+				for (idx, currItem) in matchArrayItem.enumerate() {
+					resultsText += (idx == 0) ? "Main match: " : "Group match: "
+					
+					let matchString = compareString.substringWithRange(currItem)
+					
+					resultsText += "\(matchString)\n"
+				}
+				resultsText += "\n"
 			}
+			resultsTextView.text = resultsText
 		}
 		else {
 			resultsTextView.textColor = UIColor.redColor()
-			let message = notification.object as! String
+			let message = notification.userInfo?["message"] as! String
 			resultsTextView.text = message
 		}
 	}
 	
 	
 	// MARK: - Private Functions
-	
 	
 	/// Hides keyboard
 	private func dismissKeyboard() {
@@ -181,6 +191,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		                                                 name: "messageDidChange",
 		                                                 object: nil)
 	}
+	
 	
 }
 

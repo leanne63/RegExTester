@@ -40,7 +40,7 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = ""
 		let compareString = "This is my compare string!"
-		let options = NSRegularExpressionOptions()
+		let options = NSRegularExpression.Options()
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
@@ -51,7 +51,7 @@ class RegexModelTests: XCTestCase {
 		XCTAssertEqual(emptyRangeArray.count, regexModel.matchArray.count)
 	}
 	
-	func testModelSendsProperNotification(notification: NSNotification?) {
+	func testModelSendsProperNotification(_ notification: Notification?) {
 		// TODO: finish this function
 		// looks like notification expectations are coming out in Swift 3.0:
 		// https://github.com/apple/swift-corelibs-xctest/blob/master/Sources/XCTest/XCNotificationExpectationHandler.swift
@@ -62,12 +62,12 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "ABC"
 		let compareString = "ABC"
-		let options = NSRegularExpressionOptions()
+		let options = NSRegularExpression.Options()
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -80,16 +80,16 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "A(BC)"
 		let compareString = "ABC"
-		let options = NSRegularExpressionOptions()
+		let options = NSRegularExpression.Options()
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.startIndex.advancedBy(1)
-		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]
@@ -103,12 +103,12 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "ABC"
 		let compareString = "abc"
-		let options = NSRegularExpressionOptions.CaseInsensitive
+		let options = NSRegularExpression.Options.caseInsensitive
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -121,16 +121,16 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "A(BC)"
 		let compareString = "abc"
-		let options = NSRegularExpressionOptions.CaseInsensitive
+		let options = NSRegularExpression.Options.caseInsensitive
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.startIndex.advancedBy(1)
-		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]
@@ -157,12 +157,12 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "A\\U0001F636C"
 		let compareString = "A😶C"
-		let options = NSRegularExpressionOptions()
+		let options = NSRegularExpression.Options()
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -175,16 +175,16 @@ class RegexModelTests: XCTestCase {
 		let regexModel = RegexModel()
 		let pattern = "A(\\N{Face without mouth}C)"
 		let compareString = "A😶C"
-		let options = NSRegularExpressionOptions()
+		let options = NSRegularExpression.Options()
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.startIndex.advancedBy(0)
-		let rangeEnd = compareString.startIndex.advancedBy(0 + 3)
+		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.startIndex.advancedBy(1)
-		let groupRangeEnd = compareString.startIndex.advancedBy(1 + 2)
+		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]

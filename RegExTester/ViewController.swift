@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	// MARK: - Life Cycle Overrides
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		regexPatternField.delegate = self
@@ -41,18 +41,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	deinit {
 		// unsubscribe from everything
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 
 	
 	// MARK: - Actions
 	
-	@IBAction func viewTapped(sender: UITapGestureRecognizer) {
+	@IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
 		
 		dismissKeyboard()
 	}
 	
-	@IBAction func keyboardToolbarItemTapped(sender: UIBarButtonItem) {
+	@IBAction func keyboardToolbarItemTapped(_ sender: UIBarButtonItem) {
 
 		switch sender {
 		case forwardButton:
@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	@IBAction func matchButtonTapped(sender: UIButton) {
+	@IBAction func matchButtonTapped(_ sender: UIButton) {
 		
 		dismissKeyboard()
 		resultsTextView.text = nil
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		let haveValidStrings = validateRequiredStrings()
 		
 		if haveValidStrings {
-			let regexOptions = ignoreCaseSwitch.on ? .CaseInsensitive : NSRegularExpressionOptions()
+			let regexOptions = ignoreCaseSwitch.isOn ? .caseInsensitive : NSRegularExpression.Options()
 			let patternString = regexPatternField.text!
 			let compareString = compareStringField.text!
 			
@@ -82,7 +82,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 			regexModel.findRegexMatchesWithPattern(patternString, compareString: compareString, regexOptions: regexOptions)
 		}
 		else {
-			resultsTextView.textColor = UIColor.redColor()
+			resultsTextView.textColor = UIColor.red
 			resultsTextView.text = "Regular expression string required!"
 		}
 	}
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	// MARK: - Text Field Delegate Functions
 	
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		
 		textField.resignFirstResponder()
 		
@@ -100,38 +100,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	// MARK: - Selectors
 	
-	func keyboardWillShow(notification: NSNotification) {
+	func keyboardWillShow(_ notification: Notification) {
 		
-		if regexPatternField.isFirstResponder() {
-			forwardButton.enabled = true
-			backButton.enabled = false
+		if regexPatternField.isFirstResponder {
+			forwardButton.isEnabled = true
+			backButton.isEnabled = false
 		}
-		else if compareStringField.isFirstResponder() {
-			backButton.enabled = true
-			forwardButton.enabled = false
+		else if compareStringField.isFirstResponder {
+			backButton.isEnabled = true
+			forwardButton.isEnabled = false
 		}
 	}
 	
-	func regexMatchDidComplete(notification: NSNotification) {
+	func regexMatchDidComplete(_ notification: Notification) {
 		
-		let arrayChangedNotification = "matchArrayDidChange"
+		let arrayChangedNotification = Notification.Name("matchArrayDidChange")
 		let matchArrayKey = "matchArray"
 		let compareString = compareStringField.text!
 
 		resultsTextView.text = ""
 		if notification.name == arrayChangedNotification {
-			resultsTextView.textColor = UIColor.blueColor()
-			resultsTextView.text.appendContentsOf("Matches found:\n\n")
+			resultsTextView.textColor = UIColor.blue
+			resultsTextView.text.append("Matches found:\n\n")
 			
 			let rangeArrayObject = notification.userInfo![matchArrayKey] as! RangeArray
 			let matchArray: [[Range<String.CharacterView.Index>]] = rangeArrayObject.array
 			
 			var resultsText = ""
 			for matchArrayItem in matchArray {
-				for (idx, currItem) in matchArrayItem.enumerate() {
+				for (idx, currItem) in matchArrayItem.enumerated() {
 					resultsText += (idx == 0) ? "Main match: " : "Group match: "
 					
-					let matchString = compareString.substringWithRange(currItem)
+					let matchString = compareString.substring(with: currItem)
 					
 					resultsText += "\(matchString)\n"
 				}
@@ -140,7 +140,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 			resultsTextView.text = resultsText
 		}
 		else {
-			resultsTextView.textColor = UIColor.redColor()
+			resultsTextView.textColor = UIColor.red
 			let message = notification.userInfo?["message"] as! String
 			resultsTextView.text = message
 		}
@@ -150,7 +150,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	// MARK: - Private Functions
 	
 	/// Hides keyboard
-	private func dismissKeyboard() {
+	fileprivate func dismissKeyboard() {
 		
 		// shuts down any first responders within this controller's view
 		view.endEditing(true)
@@ -164,31 +164,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	returns: True if string requirements are met.
 	
 	*/
-	private func validateRequiredStrings() -> Bool {
+	fileprivate func validateRequiredStrings() -> Bool {
 		
 		guard compareStringField.text != nil,
-			  let patternString = regexPatternField.text where !patternString.isEmpty else {
+			  let patternString = regexPatternField.text, !patternString.isEmpty else {
 			return false
 		}
 		
 		return true
 	}
 	
-	private func subscribeToStuff() {
+	fileprivate func subscribeToStuff() {
 		
-		NSNotificationCenter.defaultCenter().addObserver(self,
+		NotificationCenter.default.addObserver(self,
 		                                                 selector: #selector(keyboardWillShow(_:)),
-		                                                 name: UIKeyboardWillShowNotification,
+		                                                 name: NSNotification.Name.UIKeyboardWillShow,
 		                                                 object: nil)
 		
-		NSNotificationCenter.defaultCenter().addObserver(self,
+		NotificationCenter.default.addObserver(self,
 		                                                 selector: #selector(regexMatchDidComplete(_:)),
-		                                                 name: "matchArrayDidChange",
+		                                                 name: NSNotification.Name(rawValue: "matchArrayDidChange"),
 		                                                 object: nil)
 		
-		NSNotificationCenter.defaultCenter().addObserver(self,
+		NotificationCenter.default.addObserver(self,
 		                                                 selector: #selector(regexMatchDidComplete(_:)),
-		                                                 name: "messageDidChange",
+		                                                 name: NSNotification.Name(rawValue: "messageDidChange"),
 		                                                 object: nil)
 	}
 	

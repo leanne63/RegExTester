@@ -13,10 +13,10 @@ class RegexModel {
 	// MARK: - Properties
 	
 	// constants
-	private let matchArrayDidChange = "matchArrayDidChange"
-	private let matchArrayKey = "matchArray"
-	private let messageDidChange = "messageDidChange"
-	private let messageKey = "message"
+	fileprivate let matchArrayDidChange = "matchArrayDidChange"
+	fileprivate let matchArrayKey = "matchArray"
+	fileprivate let messageDidChange = "messageDidChange"
+	fileprivate let messageKey = "message"
 	
 	
 	/// Holds any matches found.
@@ -25,7 +25,7 @@ class RegexModel {
 			// using a custom class to wrap the array; since it's a struct, it can't be passed as AnyObject on its own
 			let rangeArray: AnyObject = RangeArray(matchArray)
 			let userInfoDict = [matchArrayKey: rangeArray]
-			NSNotificationCenter.defaultCenter().postNotificationName(matchArrayDidChange, object: nil, userInfo: userInfoDict)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: matchArrayDidChange), object: nil, userInfo: userInfoDict)
 		}
 	}
 	
@@ -34,7 +34,7 @@ class RegexModel {
 		didSet {
 			if let message = message {
 				let userInfoDict = [messageKey: message]
-				NSNotificationCenter.defaultCenter().postNotificationName(messageDidChange, object: nil, userInfo: userInfoDict)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: messageDidChange), object: nil, userInfo: userInfoDict)
 			}
 		}
 	}
@@ -52,7 +52,7 @@ class RegexModel {
 		- regexOptions: Any special pattern-matching options, such as NSRegularExpressionOptions.CaseInsensitive.
 	
 	*/
-	func findRegexMatchesWithPattern(regexPattern: String, compareString: String, regexOptions: NSRegularExpressionOptions) {
+	func findRegexMatchesWithPattern(_ regexPattern: String, compareString: String, regexOptions: NSRegularExpression.Options) {
 
 		// create regex object
 		guard let regex = try? NSRegularExpression(pattern: regexPattern, options: regexOptions) else {
@@ -61,7 +61,7 @@ class RegexModel {
 			return
 		}
 		
-		let matchingOptions: NSMatchingOptions = NSMatchingOptions()
+		let matchingOptions: NSRegularExpression.MatchingOptions = NSRegularExpression.MatchingOptions()
 		
 		// note that search range must be NSRange, even though compare string is a String (not NSString!) (as of Swift 2.2)
 		// as a result, range length value must match NSString, NOT String (to allow for unicode characters such as emoji)
@@ -70,7 +70,7 @@ class RegexModel {
 		let searchRange = NSMakeRange(rangeLocation, rangeLength)
 		
 		// run the regex
-		let matches = regex.matchesInString(compareString, options: matchingOptions, range: searchRange)
+		let matches = regex.matches(in: compareString, options: matchingOptions, range: searchRange)
 
 		guard matches.count > 0 else {
 			message = "No matches found!"
@@ -79,16 +79,16 @@ class RegexModel {
 		
 		// matches come as NSRange values; we want to put Swift Range values into the array, though
 		var matchList = [[Range<String.CharacterView.Index>]]()
-		for (outerIndex, match) in matches.enumerate() {
+		for (outerIndex, match) in matches.enumerated() {
 			let numRanges = match.numberOfRanges
 			
-			matchList.insert([Range<String.CharacterView.Index>](), atIndex: outerIndex)
+			matchList.insert([Range<String.CharacterView.Index>](), at: outerIndex)
 			
 			for innerIndex in 0..<numRanges {
-				let theNSRange = match.rangeAtIndex(innerIndex)
+				let theNSRange = match.rangeAt(innerIndex)
 				let swiftMatchRange = makeSwiftRangeForString(compareString, nsRange: theNSRange)
 				
-				matchList[outerIndex].insert(swiftMatchRange, atIndex: innerIndex)
+				matchList[outerIndex].insert(swiftMatchRange, at: innerIndex)
 			}
 		}
 		
@@ -98,7 +98,7 @@ class RegexModel {
 	
 	// MARK: - Private Functions
 	
-	private func makeSwiftRangeForString(swiftString: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
+	fileprivate func makeSwiftRangeForString(_ swiftString: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
 		
 		// TODO: add "as of version" attribute in case of future changes
 		// TODO: what to do if range ends up being nil? don't want crashing!
@@ -106,11 +106,10 @@ class RegexModel {
 		//   need to convert String argument to UTF16 view to create a valid Swift String range
 		let string16 = swiftString.utf16
 		
-		let start = nsRange.location
-		let end = nsRange.location + nsRange.length
+        let end: Int = nsRange.location + nsRange.length
 		
-		let swiftRangeStart = string16.startIndex.advancedBy(start).samePositionIn(swiftString)
-		let swiftRangeEnd = string16.startIndex.advancedBy(end).samePositionIn(swiftString)
+        let swiftRangeStart = string16.startIndex.advanced(by: end).samePosition(in: swiftString)
+        let swiftRangeEnd = string16.startIndex.advanced(by: end).samePosition(in: swiftString)
 		
 		let swiftRange = Range(swiftRangeStart!..<swiftRangeEnd!)
 		return swiftRange

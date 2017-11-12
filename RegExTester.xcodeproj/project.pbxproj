@@ -14,6 +14,7 @@
 		D5751D131CD7FE23006CAEE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5751D111CD7FE23006CAEE7 /* LaunchScreen.storyboard */; };
 		D5751D1E1CD7FE23006CAEE7 /* RegExTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5751D1D1CD7FE23006CAEE7 /* RegExTesterTests.swift */; };
 		D5751D291CD7FE24006CAEE7 /* RegExTesterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5751D281CD7FE24006CAEE7 /* RegExTesterUITests.swift */; };
+		D5995D8B1FB801CB00B563B7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D5995D8A1FB801CB00B563B7 /* README.md */; };
 		D5A472C41CE02CAF005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
 		D5A472C61CE29E46005887D3 /* RegexModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C51CE29E46005887D3 /* RegexModelTests.swift */; };
 		D5A472C71CE29F35005887D3 /* RegexModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A472C31CE02CAF005887D3 /* RegexModel.swift */; };
@@ -51,6 +52,7 @@
 		D5751D241CD7FE23006CAEE7 /* RegExTesterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegExTesterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5751D281CD7FE24006CAEE7 /* RegExTesterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegExTesterUITests.swift; sourceTree = "<group>"; };
 		D5751D2A1CD7FE24006CAEE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5995D8A1FB801CB00B563B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D5A472C31CE02CAF005887D3 /* RegexModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModel.swift; sourceTree = "<group>"; };
 		D5A472C51CE29E46005887D3 /* RegexModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexModelTests.swift; sourceTree = "<group>"; };
 		D5D5829C1CED18FF00E39110 /* RangeArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeArray.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				D5751D0F1CD7FE23006CAEE7 /* Assets.xcassets */,
 				D5751D111CD7FE23006CAEE7 /* LaunchScreen.storyboard */,
 				D5751D141CD7FE23006CAEE7 /* Info.plist */,
+				D5995D8A1FB801CB00B563B7 /* README.md */,
 			);
 			path = RegExTester;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				D5751D131CD7FE23006CAEE7 /* LaunchScreen.storyboard in Resources */,
 				D5751D101CD7FE23006CAEE7 /* Assets.xcassets in Resources */,
+				D5995D8B1FB801CB00B563B7 /* README.md in Resources */,
 				D5751D0E1CD7FE23006CAEE7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

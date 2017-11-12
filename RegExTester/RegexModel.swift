@@ -20,7 +20,7 @@ class RegexModel {
 	
 	
 	/// Holds any matches found.
-	var matchArray = [[Range<String.CharacterView.Index>]]() {
+	var matchArray = [[Range<String.Index>]]() {
 		didSet {
 			// using a custom class to wrap the array; since it's a struct, it can't be passed as AnyObject on its own
 			let rangeArray: AnyObject = RangeArray(matchArray)
@@ -78,17 +78,18 @@ class RegexModel {
 		}
 		
 		// matches come as NSRange values; we want to put Swift Range values into the array, though
-		var matchList = [[Range<String.CharacterView.Index>]]()
+		var matchList = [[Range<String.Index>]]()
 		for (outerIndex, match) in matches.enumerated() {
 			let numRanges = match.numberOfRanges
 			
-			matchList.insert([Range<String.CharacterView.Index>](), at: outerIndex)
+			matchList.insert([Range<String.Index>](), at: outerIndex)
 			
 			for innerIndex in 0..<numRanges {
-				let theNSRange = match.rangeAt(innerIndex)
+				let theNSRange = match.range(at: innerIndex)
 				let swiftMatchRange = makeSwiftRangeForString(compareString, nsRange: theNSRange)
 				
-				matchList[outerIndex].insert(swiftMatchRange, at: innerIndex)
+				// TODO: force unwrapping here as quick fix for Swift 4 update - dangerous! fix this!
+				matchList[outerIndex].insert(swiftMatchRange!, at: innerIndex)
 			}
 		}
 		
@@ -98,7 +99,7 @@ class RegexModel {
 	
 	// MARK: - Private Functions
 	
-	fileprivate func makeSwiftRangeForString(_ swiftString: String, nsRange: NSRange) -> Range<String.CharacterView.Index> {
+	fileprivate func makeSwiftRangeForString(_ swiftString: String, nsRange: NSRange) -> Range<String.Index>? {
 		
 		// TODO: add "as of version" attribute in case of future changes
 		// TODO: what to do if range ends up being nil? don't want crashing!
@@ -106,13 +107,15 @@ class RegexModel {
 		//   need to convert String argument to UTF16 view to create a valid Swift String range
 		let string16 = swiftString.utf16
 		
-        let start: Int = nsRange.location
-        let end: Int = start + nsRange.length
+		guard let convertedRange = Range(nsRange) else {
+			// couldn't create Swift Range from NSRange
+			return nil
+		}
 		
-        let swiftRangeStart = string16.startIndex.advanced(by: start).samePosition(in: swiftString)
-        let swiftRangeEnd = string16.startIndex.advanced(by: end).samePosition(in: swiftString)
+        let swiftRangeStart = string16.index(string16.startIndex, offsetBy: convertedRange.lowerBound)
+		let swiftRangeEnd = string16.index(string16.startIndex, offsetBy: convertedRange.upperBound)
 		
-		let swiftRange = Range(swiftRangeStart!..<swiftRangeEnd!)
+		let swiftRange = Range(swiftRangeStart..<swiftRangeEnd)
 		return swiftRange
 	}
 	

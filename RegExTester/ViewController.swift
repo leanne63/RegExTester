@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 	
 	// MARK: - Selectors
 	
-	func keyboardWillShow(_ notification: Notification) {
+	@objc func keyboardWillShow(_ notification: Notification) {
 		
 		if regexPatternField.isFirstResponder {
 			forwardButton.isEnabled = true
@@ -112,7 +112,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
-	func regexMatchDidComplete(_ notification: Notification) {
+	@objc func regexMatchDidComplete(_ notification: Notification) {
 		
 		let arrayChangedNotification = Notification.Name("matchArrayDidChange")
 		let matchArrayKey = "matchArray"
@@ -124,14 +124,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
 			resultsTextView.text.append("Matches found:\n\n")
 			
 			let rangeArrayObject = notification.userInfo![matchArrayKey] as! RangeArray
-			let matchArray: [[Range<String.CharacterView.Index>]] = rangeArrayObject.array
+			let matchArray: [[Range<String.Index>]] = rangeArrayObject.array
 			
 			var resultsText = ""
 			for matchArrayItem in matchArray {
 				for (idx, currItem) in matchArrayItem.enumerated() {
 					resultsText += (idx == 0) ? "Main match: " : "Group match: "
 					
-					let matchString = compareString.substring(with: currItem)
+					let matchString = compareString[currItem.lowerBound..<currItem.upperBound]
 					
 					resultsText += "\(matchString)\n"
 				}

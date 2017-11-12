@@ -30,7 +30,7 @@ class RegexModelTests: XCTestCase {
 	func testModelMatchArrayEmptyAtStart() {
 		
 		let regexModel = RegexModel()
-		let emptyRangeArray = [[Range<String.CharacterView.Index>]]()
+		let emptyRangeArray = [[Range<String.Index>]]()
 		
 		XCTAssertEqual(emptyRangeArray.count, regexModel.matchArray.count)
 	}
@@ -45,7 +45,7 @@ class RegexModelTests: XCTestCase {
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
 		let expectedMessage = "Unable to configure RegEx object with specified pattern (/<empty!>/)."
-		let emptyRangeArray = [[Range<String.CharacterView.Index>]]()
+		let emptyRangeArray = [[Range<String.Index>]]()
 		
 		XCTAssertEqual(expectedMessage, regexModel.message)
 		XCTAssertEqual(emptyRangeArray.count, regexModel.matchArray.count)
@@ -66,8 +66,8 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -84,12 +84,12 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
-		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
+		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]
@@ -107,8 +107,8 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -125,12 +125,12 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
-		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
+		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]
@@ -161,8 +161,8 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
 		let expectedArray = [[matchRange]]
@@ -179,12 +179,12 @@ class RegexModelTests: XCTestCase {
 		
 		regexModel.findRegexMatchesWithPattern(pattern, compareString: compareString, regexOptions: options)
 		
-		let rangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 0)
-		let rangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 0 + 3)
+		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
+		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
 		let matchRange = Range(rangeStart..<rangeEnd)
 		
-		let groupRangeStart = compareString.characters.index(compareString.startIndex, offsetBy: 1)
-		let groupRangeEnd = compareString.characters.index(compareString.startIndex, offsetBy: 1 + 2)
+		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
+		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
 		let groupRange = Range(groupRangeStart..<groupRangeEnd)
 		
 		let expectedArray = [[matchRange, groupRange]]

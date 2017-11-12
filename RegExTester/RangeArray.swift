@@ -9,10 +9,10 @@
 import Foundation
 
 /// An array of arrays of Range<Index> values disguised as an AnyObject.
-class RangeArray: AnyObject {
+class RangeArray: Any {
 	
 	/// The multidimensional Range<Index> array to be wrapped as an AnyObject.
-	var array: [[Range<String.CharacterView.Index>]]!
+	var array: [[Range<String.Index>]]!
 	
 	/**
 	
@@ -27,7 +27,7 @@ class RangeArray: AnyObject {
 	- important: Range<Index> is shorthand for Range<String.CharacterView.Index>
 	
 	*/
-	init(_ rangeArray: [[Range<String.CharacterView.Index>]]) {
+	init(_ rangeArray: [[Range<String.Index>]]) {
 		
 		array = rangeArray
 	}

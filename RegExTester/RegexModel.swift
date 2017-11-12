@@ -106,9 +106,10 @@ class RegexModel {
 		//   need to convert String argument to UTF16 view to create a valid Swift String range
 		let string16 = swiftString.utf16
 		
-        let end: Int = nsRange.location + nsRange.length
+        let start: Int = nsRange.location
+        let end: Int = start + nsRange.length
 		
-        let swiftRangeStart = string16.startIndex.advanced(by: end).samePosition(in: swiftString)
+        let swiftRangeStart = string16.startIndex.advanced(by: start).samePosition(in: swiftString)
         let swiftRangeEnd = string16.startIndex.advanced(by: end).samePosition(in: swiftString)
 		
 		let swiftRange = Range(swiftRangeStart!..<swiftRangeEnd!)

@@ -23,7 +23,7 @@ class RegexModel {
 	var matchArray = [[Range<String.Index>]]() {
 		didSet {
 			// using a custom class to wrap the array; since it's a struct, it can't be passed as AnyObject on its own
-			let rangeArray: AnyObject = RangeArray(matchArray)
+			let rangeArray: Any = RangeArray(matchArray)
 			let userInfoDict = [matchArrayKey: rangeArray]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: matchArrayDidChange), object: nil, userInfo: userInfoDict)
 		}
@@ -115,7 +115,8 @@ class RegexModel {
         let swiftRangeStart = string16.index(string16.startIndex, offsetBy: convertedRange.lowerBound)
 		let swiftRangeEnd = string16.index(string16.startIndex, offsetBy: convertedRange.upperBound)
 		
-		let swiftRange = Range(swiftRangeStart..<swiftRangeEnd)
+		let swiftRange = Range(uncheckedBounds: (swiftRangeStart, swiftRangeEnd))
+		
 		return swiftRange
 	}
 	

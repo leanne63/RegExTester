@@ -9,13 +9,12 @@
 import Foundation
 
 /// An array of arrays of Range<Index> values disguised as an AnyObject.
-class RangeArray: Any {
+struct RangeArray: Any {
 	
 	/// The multidimensional Range<Index> array to be wrapped as an AnyObject.
 	var array: [[Range<String.Index>]]!
 	
 	/**
-	
 	Initialized an array of arrays of Range<Index> objects.
 	Use this to pass NSRegularExpression results around, since Swift doesn't
 	allow structs as AnyObject.

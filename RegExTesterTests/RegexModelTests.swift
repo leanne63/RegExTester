@@ -68,7 +68,7 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let expectedArray = [[matchRange]]
 
@@ -86,11 +86,11 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
 		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
-		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		let groupRange = Range(uncheckedBounds: (groupRangeStart, groupRangeEnd))
 		
 		let expectedArray = [[matchRange, groupRange]]
 
@@ -109,7 +109,7 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let expectedArray = [[matchRange]]
 		
@@ -127,11 +127,11 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
 		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
-		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		let groupRange = Range(uncheckedBounds: (groupRangeStart, groupRangeEnd))
 		
 		let expectedArray = [[matchRange, groupRange]]
 		
@@ -163,7 +163,7 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let expectedArray = [[matchRange]]
 		
@@ -181,11 +181,11 @@ class RegexModelTests: XCTestCase {
 		
 		let rangeStart = compareString.index(compareString.startIndex, offsetBy: 0)
 		let rangeEnd = compareString.index(compareString.startIndex, offsetBy: 0 + 3)
-		let matchRange = Range(rangeStart..<rangeEnd)
+		let matchRange = Range(uncheckedBounds: (rangeStart, rangeEnd))
 		
 		let groupRangeStart = compareString.index(compareString.startIndex, offsetBy: 1)
 		let groupRangeEnd = compareString.index(compareString.startIndex, offsetBy: 1 + 2)
-		let groupRange = Range(groupRangeStart..<groupRangeEnd)
+		let groupRange = Range(uncheckedBounds: (groupRangeStart, groupRangeEnd))
 		
 		let expectedArray = [[matchRange, groupRange]]
 		
